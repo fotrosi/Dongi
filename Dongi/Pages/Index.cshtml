@@ -1,0 +1,35 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Dongi.Localization
+@inject IHtmlLocalizer<DongiResource> L
+@model Dongi.Pages.IndexModel
+
+@section styles {
+    <abp-style src="/Pages/Index.cshtml.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/Index.cshtml.js" />
+}
+<div class="container">
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>
+                @L["Welcome_Title"]
+            </abp-card-title>
+        </abp-card-header>
+        <abp-card-body>            
+            @L["Welcome_Text"]
+        </abp-card-body>
+    </abp-card>
+    <br />
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>
+                @L["Checkout"] :
+            </abp-card-title>
+        </abp-card-header>
+        <abp-card-body>
+            <abp-table striped-rows="true" id="CheckoutTable"></abp-table>
+        </abp-card-body>
+    </abp-card>
+</div>

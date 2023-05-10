@@ -1,0 +1,39 @@
+﻿@page
+@using Dongi.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<DongiResource> L
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Dongi.Pages.TxManager.CreateModalModel
+@{
+    Layout = null;
+}
+
+<form asp-page="/TxManager/CreateModal">
+    <abp-modal>
+        <abp-modal-header title="@L["NewTx"].Value :"></abp-modal-header>
+        <abp-modal-body>
+            <abp-table>
+                <tr>
+                    <td><abp-input asp-for="Tx.Description" /></td>
+                    <td><abp-input asp-for="Tx.Date" /></td>
+                </tr>
+            </abp-table>
+            <abp-table>
+                <tr>
+                    <td>@L["Name"].Value</td>
+                    <td>@L["Amount"].Value</td>
+                    <td>@L["Quota"].Value</td>
+                </tr>
+                @for (int i = 0; i < Model.Tx.TxDetails.Count; i++)
+                {
+                    <tr>
+                        <td><input type="hidden" asp-for="Tx.TxDetails[i].Person.Id" />@Model.Tx.TxDetails[i].Person.Name</td>
+                        <td><input type="number" asp-for="Tx.TxDetails[i].Amount" onfocus="this.select();" /></td>
+                        <td><input type="number" asp-for="Tx.TxDetails[i].Quota" onfocus="this.select();" /></td>
+                    </tr>
+                }
+            </abp-table>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

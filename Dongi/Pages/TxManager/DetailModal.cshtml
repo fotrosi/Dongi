@@ -1,0 +1,39 @@
+﻿@page
+@using Dongi.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<DongiResource> L
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@using Dongi.Pages.TxManager
+@model DetailModalModel
+@{
+    Layout = null;
+}
+
+<abp-modal>
+    <abp-modal-header title="@L["Detail"].Value :"></abp-modal-header>
+    <abp-modal-body>
+        @if (Model.TxDetails != null)
+        {
+            <abp-table>
+                <tr>
+                    <td>@L["Name"].Value</td>
+                    <td>@L["Amount"].Value</td>
+                    <td>@L["Quota"].Value</td>
+                </tr>
+                @for (int i = 0; i < Model.TxDetails.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.TxDetails[i].PersonName</td>
+                        <td>@Model.TxDetails[i].Amount</td>
+                        <td>@Model.TxDetails[i].Quota</td>
+                    </tr>
+                }
+            </abp-table>
+        }
+        else
+        {
+            <h2>@L["NotFound"].Value</h2>
+        }
+    </abp-modal-body>
+    <abp-modal-footer buttons="@(AbpModalButtons.Close)"></abp-modal-footer>
+</abp-modal>
